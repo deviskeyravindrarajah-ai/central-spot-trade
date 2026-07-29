@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
@@ -18,6 +19,11 @@ import { Route as ListingIdRouteImport } from './routes/listing.$id'
 import { Route as AuthenticatedPostRouteImport } from './routes/_authenticated/post'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/explore': typeof ExploreRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/account': typeof AuthenticatedAccountRoute
   '/post': typeof AuthenticatedPostRoute
   '/listing/$id': typeof ListingIdRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/explore': typeof ExploreRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/account': typeof AuthenticatedAccountRoute
   '/post': typeof AuthenticatedPostRoute
   '/listing/$id': typeof ListingIdRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/explore': typeof ExploreRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/post': typeof AuthenticatedPostRoute
   '/listing/$id': typeof ListingIdRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/explore'
+    | '/sitemap.xml'
     | '/account'
     | '/post'
     | '/listing/$id'
@@ -103,6 +113,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/explore'
+    | '/sitemap.xml'
     | '/account'
     | '/post'
     | '/listing/$id'
@@ -113,6 +124,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/explore'
+    | '/sitemap.xml'
     | '/_authenticated/account'
     | '/_authenticated/post'
     | '/listing/$id'
@@ -124,11 +136,19 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
   ExploreRoute: typeof ExploreRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ListingIdRoute: typeof ListingIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/explore': {
       id: '/explore'
       path: '/explore'
@@ -207,6 +227,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
   ExploreRoute: ExploreRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ListingIdRoute: ListingIdRoute,
 }
 export const routeTree = rootRouteImport
