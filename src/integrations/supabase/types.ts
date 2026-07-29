@@ -14,7 +14,244 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          icon_name: string
+          id: number
+          name: string
+          slug: string
+        }
+        Insert: {
+          icon_name: string
+          id?: number
+          name: string
+          slug: string
+        }
+        Update: {
+          icon_name?: string
+          id?: number
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      cities: {
+        Row: {
+          district_id: number
+          id: number
+          name: string
+        }
+        Insert: {
+          district_id: number
+          id?: number
+          name: string
+        }
+        Update: {
+          district_id?: number
+          id?: number
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cities_district_id_fkey"
+            columns: ["district_id"]
+            isOneToOne: false
+            referencedRelation: "districts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      districts: {
+        Row: {
+          id: number
+          name: string
+        }
+        Insert: {
+          id?: number
+          name: string
+        }
+        Update: {
+          id?: number
+          name?: string
+        }
+        Relationships: []
+      }
+      listings: {
+        Row: {
+          attributes: Json
+          category_id: number
+          city_id: number
+          created_at: string
+          description: string
+          district_id: number
+          id: string
+          images: string[]
+          is_negotiable: boolean
+          price_lkr: number
+          seller_id: string
+          status: string
+          subcategory_id: number
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          attributes?: Json
+          category_id: number
+          city_id: number
+          created_at?: string
+          description: string
+          district_id: number
+          id?: string
+          images?: string[]
+          is_negotiable?: boolean
+          price_lkr: number
+          seller_id: string
+          status?: string
+          subcategory_id: number
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          attributes?: Json
+          category_id?: number
+          city_id?: number
+          created_at?: string
+          description?: string
+          district_id?: number
+          id?: string
+          images?: string[]
+          is_negotiable?: boolean
+          price_lkr?: number
+          seller_id?: string
+          status?: string
+          subcategory_id?: number
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "listings_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_district_id_fkey"
+            columns: ["district_id"]
+            isOneToOne: false
+            referencedRelation: "districts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_seller_id_fkey"
+            columns: ["seller_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_subcategory_id_fkey"
+            columns: ["subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          address: string
+          avatar_url: string | null
+          city_id: number
+          created_at: string
+          district_id: number
+          full_name: string
+          id: string
+          nic_number: string
+          phone_number: string
+          updated_at: string
+        }
+        Insert: {
+          address: string
+          avatar_url?: string | null
+          city_id: number
+          created_at?: string
+          district_id: number
+          full_name: string
+          id: string
+          nic_number: string
+          phone_number: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          avatar_url?: string | null
+          city_id?: number
+          created_at?: string
+          district_id?: number
+          full_name?: string
+          id?: string
+          nic_number?: string
+          phone_number?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profiles_district_id_fkey"
+            columns: ["district_id"]
+            isOneToOne: false
+            referencedRelation: "districts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subcategories: {
+        Row: {
+          category_id: number
+          id: number
+          name: string
+          slug: string
+        }
+        Insert: {
+          category_id: number
+          id?: number
+          name: string
+          slug: string
+        }
+        Update: {
+          category_id?: number
+          id?: number
+          name?: string
+          slug?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subcategories_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
