@@ -174,3 +174,13 @@
   font-weight: 700;
   color: var(--color-primary);
 }
+
+/* Hide the Lovable floating badge on published/preview deployments */
+#lovable-badge,
+[id="lovable-badge"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
