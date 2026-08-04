@@ -2,9 +2,12 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { toast } from "sonner";
-import { ChevronRight, Info, LogOut, Pencil } from "lucide-react";
+import { ChevronRight, FlaskConical, Info, LogOut, Pencil } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdTestMode } from "@/hooks/useAdTestMode";
+import { AD_TEST_TOGGLE_ENABLED } from "@/lib/ads";
+import { Switch } from "@/components/ui/switch";
 import { myListingsQuery, profileQuery, referenceDataQuery } from "@/lib/queries";
 import { MediaImage } from "@/components/MediaImage";
 import { formatLkr, formatRelativeDate } from "@/lib/format";
@@ -35,6 +38,7 @@ function AccountPage() {
   const { data: profile } = useQuery(profileQuery(userId));
   const { data: reference } = useQuery(referenceDataQuery);
   const { data: listings, isLoading } = useQuery(myListingsQuery(userId));
+  const { testMode, setTestMode } = useAdTestMode();
 
   const location = useMemo(() => {
     if (!profile || !reference) return "";
@@ -160,6 +164,25 @@ function AccountPage() {
       </section>
 
       <section className="mt-6 space-y-2">
+        {AD_TEST_TOGGLE_ENABLED && (
+          <div className="surface-card flex items-center justify-between gap-3 px-4 py-3">
+            <span className="flex items-center gap-2 text-sm font-semibold">
+              <FlaskConical className="h-4 w-4 text-secondary" aria-hidden />
+              <span>
+                AdMob test ads
+                <span className="block text-[11px] font-normal text-muted-foreground">
+                  Serve Google test units during development and QA
+                </span>
+              </span>
+            </span>
+            <Switch
+              checked={testMode}
+              onCheckedChange={setTestMode}
+              aria-label="Use AdMob test ad units"
+            />
+          </div>
+        )}
+
         <Link
           to="/about"
           className="surface-card flex items-center justify-between px-4 py-3 text-sm font-semibold"
@@ -170,6 +193,7 @@ function AccountPage() {
           </span>
           <ChevronRight className="h-4 w-4 text-muted-foreground" aria-hidden />
         </Link>
+
 
         <button
           type="button"
