@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { Car, Home as HomeIcon, Smartphone, Wrench, Search, ShieldCheck } from "lucide-react";
 import { listingsQuery, referenceDataQuery } from "@/lib/queries";
 import { ListingCard } from "@/components/ListingCard";
+import { AdSlot } from "@/components/AdSlot";
+import { FEED_AD_INTERVAL } from "@/lib/ads";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
@@ -137,13 +139,17 @@ function HomeFeed() {
           </div>
         ) : listings && listings.length > 0 ? (
           <div className="space-y-3">
-            {listings.map((listing) => (
-              <ListingCard
-                key={listing.id}
-                listing={listing}
-                cityName={cityMap.get(listing.city_id)}
-                districtName={districtMap.get(listing.district_id)}
-              />
+            {listings.map((listing, i) => (
+              <div key={listing.id} className="space-y-3">
+                <ListingCard
+                  listing={listing}
+                  cityName={cityMap.get(listing.city_id)}
+                  districtName={districtMap.get(listing.district_id)}
+                />
+                {(i + 1) % FEED_AD_INTERVAL === 0 && i + 1 < listings.length && (
+                  <AdSlot unit="nativeFeed" format="native" />
+                )}
+              </div>
             ))}
           </div>
         ) : (

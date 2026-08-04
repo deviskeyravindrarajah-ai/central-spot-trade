@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { listingQuery, referenceDataQuery } from "@/lib/queries";
 import { MediaImage } from "@/components/MediaImage";
+import { AdSlot } from "@/components/AdSlot";
 import { SAFETY_WARNING } from "@/lib/constants";
 import { formatLkr, formatRelativeDate, humanizeKey, toWhatsAppNumber } from "@/lib/format";
 import { resolveMediaUrls } from "@/lib/media";
@@ -211,6 +212,10 @@ function ListingDetail() {
             {listing.profiles?.full_name ?? "TradeSpot member"}
           </p>
         </section>
+
+        <AdSlot unit="detailBanner" />
+
+        <div className="pb-16" />
       </div>
 
       {phone && (
