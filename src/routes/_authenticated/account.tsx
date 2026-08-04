@@ -38,6 +38,7 @@ function AccountPage() {
   const { data: profile } = useQuery(profileQuery(userId));
   const { data: reference } = useQuery(referenceDataQuery);
   const { data: listings, isLoading } = useQuery(myListingsQuery(userId));
+  const { testMode, setTestMode } = useAdTestMode();
 
   const location = useMemo(() => {
     if (!profile || !reference) return "";
