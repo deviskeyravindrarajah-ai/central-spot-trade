@@ -1,10 +1,8 @@
 # Central Trade Hub
 
-# 🚀 TRADESPOT CENTRAL — MASTER SYSTEM PROMPT
+# 🚀 TRADESPOT CENTRAL
 
-```text
 
-Act as a Principal Full-Stack Mobile Engineer & Solutions Architect. You are tasked with building "TradeSpot Central" end-to-end—a production-ready, hyper-local, peer-to-peer classifieds marketplace mobile app optimized exclusively for Sri Lanka’s Central Province.
 
 
 
@@ -428,9 +426,6 @@ l, WhatsApp, SMS actions and safety disclaimer.
 
  5. The **About & Developer Credits Screen**.
 
-Write clean, modular, fully typed TypeScript code. Do not skip functional logic or leave placeholder comments.
-
-This project was built with [Lovable](https://lovable.dev).
 
 **Live app**: https://central-spot-trade.lovable.app
 
