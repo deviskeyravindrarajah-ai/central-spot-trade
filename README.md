@@ -50,7 +50,7 @@
 
 
 
-### 2. RECOMMENDED TECH STACK
+### 2.TECH STACK
 
 - Frontend (Mobile): React Native with Expo Router (File-based routing), TypeScript, and NativeWind (Tailwind CSS for React Native) or StyleSheet.
 
@@ -71,8 +71,6 @@
 ### 3. DATABASE SCHEMA (POSTGRESQL / SUPABASE)
 
 
-
-Generate and execute the following database structure:
 
 
 
@@ -110,13 +108,13 @@ CREATE TABLE cities (
 
 
 
--- Seed Central Province Locations
+--  Central Province Locations
 
-INSERT INTO districts (id, name) VALUES (1, 'Kandy'), (2, 'Matale'), (3, 'Nuwara Eliya');
+  districts (id, name) VALUES (1, 'Kandy'), (2, 'Matale'), (3, 'Nuwara Eliya');
 
 
 
-INSERT INTO cities (district_id, name) VALUES
+  cities (district_id, name) VALUES
 
 -- Kandy
 
@@ -134,7 +132,7 @@ INSERT INTO cities (district_id, name) VALUES
 
 -- 3. User Profiles Table
 
-CREATE TABLE profiles (
+ TABLE profiles (
 
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
 
@@ -162,7 +160,7 @@ CREATE TABLE profiles (
 
 -- 4. Categories & Subcategories
 
-CREATE TABLE categories (
+TABLE categories (
 
     id SERIAL PRIMARY KEY,
 
@@ -175,8 +173,7 @@ CREATE TABLE categories (
 );
 
 
-
-INSERT INTO categories (id, name, slug, icon_name) VALUES
+ categories (id, name, slug, icon_name) VALUES
 
 (1, 'Vehicles', 'vehicles', 'car'),
 
@@ -188,7 +185,7 @@ INSERT INTO categories (id, name, slug, icon_name) VALUES
 
 
 
-CREATE TABLE subcategories (
+TABLE subcategories (
 
     id SERIAL PRIMARY KEY,
 
@@ -202,7 +199,7 @@ CREATE TABLE subcategories (
 
 
 
-INSERT INTO subcategories (category_id, name, slug) VALUES
+subcategories (category_id, name, slug) VALUES
 
 (1, 'Cars & Vans', 'cars-vans'), (1, 'Motorbikes & Scooters', 'motorbikes'), (1, 'Three Wheelers', 'three-wheelers'), (1, 'Heavy Duty & Trucks', 'trucks'),
 
@@ -216,7 +213,7 @@ INSERT INTO subcategories (category_id, name, slug) VALUES
 
 -- 5. Listings Table
 
-CREATE TABLE listings (
+ TABLE listings (
 
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
@@ -310,13 +307,13 @@ CREATE INDEX idx_listings_status ON listings(status);
 
 ### 5. AD POSTING & MEDIA RULES
 
-The "Post an Ad" screen must strictly enforce the following constraints:
+The "Post an Ad" screen strictly enforces the following constraints:
 
  1. Media Upload Limits:
 
-   * Images: Minimum 1, Maximum 5 photos. Compression must run client-side using expo-image-manipulator prior to uploading to the Supabase Storage listing-media bucket.
+   * Images: Minimum 1, Maximum 5 photos. Compression  run client-side using expo-image-manipulator prior to uploading to the Supabase Storage listing-media bucket.
 
-   * Video: Maximum 1 optional video. The app must validate duration client-side (duration <= 60000ms / 1 minute) using expo-av. Reject videos over 60 seconds with a clear user toast warning.
+   * Video: Maximum 1 optional video. The app validates duration client-side (duration <= 60000ms / 1 minute) using expo-av. Reject videos over 60 seconds with a clear user toast warning.
 
  2. LKR Currency Handling:
 
@@ -429,13 +426,6 @@ l, WhatsApp, SMS actions and safety disclaimer.
 
 **Live app**: https://central-spot-trade.lovable.app
 
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/cb1e261f-14d9-4dcc-80e2-80985d3bedf0).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
