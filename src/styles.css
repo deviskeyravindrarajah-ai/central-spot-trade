@@ -177,10 +177,22 @@
 
 /* Hide the Lovable floating badge on published/preview deployments */
 #lovable-badge,
-[id="lovable-badge"] {
+[id="lovable-badge"],
+#lovable-badge-container,
+[id="lovable-badge-container"],
+.lovable-badge,
+[class*="lovable-badge"],
+[id*="lovable-badge"],
+a[href*="lovable.app"][target="_blank"],
+iframe[src*="lovable"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
 }
 
